@@ -4,6 +4,8 @@ services:
   app:
     image: nginx:latest
     restart: always
+    networks:
+      - treafik-network
     labels:
       # Frontend
       - "traefik.enable=true"
@@ -13,3 +15,8 @@ services:
       - "traefik.http.routers.app.service=app"
       - "traefik.http.routers.app.tls.certresolver=leresolver"
       - "traefik.docker.network=treafik-network"
+
+networks:
+  treafik-network:
+    external: true
+    name: treafik-network
